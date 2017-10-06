@@ -17,7 +17,7 @@ export default class Crawler {
       glob(g, { extended: true, globstar: true })
     );
     this.stripJS = options.stripJS;
-    this.stripLink = options.stripLink;
+    this.stripStyle = options.stripStyle;
     this.processed = {};
     this.snapshotDelay = snapshotDelay;
   }
@@ -47,12 +47,11 @@ export default class Crawler {
             if (strip.exec(url.parse(script.src).path)) script.remove();
           });
         }
-        if (this.stripLink) {
-          const strip = new RegExp(this.stripLink);
+        if (this.stripStyle) {
           Array.from(
-            window.document.querySelectorAll('link')
+            window.document.querySelectorAll('style')
           ).forEach(link => {
-            if (strip.exec(url.parse(link.href).path)) link.remove();
+            if (link.hasAttribute(this.stripStyle)) link.remove();
           });
         }
         const html = jsdom.serializeDocument(window.document);
