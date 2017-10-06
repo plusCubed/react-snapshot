@@ -1,6 +1,6 @@
 /* Wraps a jsdom call and returns the full page */
 
-import jsdom from 'jsdom';
+import jsdom from 'jsdom/lib/old-api';
 import ReactDOMServer from 'react-dom/server';
 
 export default (protocol, host, path, delay) => {
