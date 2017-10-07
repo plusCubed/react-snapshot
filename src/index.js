@@ -14,8 +14,8 @@ export const prerender = (rootComponent, domElement) => {
 };
 
 export const isPrerendering = () => {
-  return navigator.userAgent.match(/Node\.js/i) &&
+  return !!(navigator.userAgent.match(/Node\.js/i) &&
     window &&
     window.reactSnapshotRender &&
-    window.ReactDOMServer;
+    window.ReactDOMServer);
 };
